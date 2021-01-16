@@ -1,0 +1,12 @@
+{
+  "name": "updatemovielist",
+  "displayName": "updatemovielist",
+  "expo": {
+    "name": "updatemovielist",
+    "slug": "updatemovielist",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
