@@ -1,49 +1,52 @@
 import * as React from 'react';
-import {useState} from 'react';
-import axios from 'axios';
-import {StyleSheet, Text, View, TextInput,ScrollView,Image,Modal,TouchableHighlight, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {StyleSheet, Text, View,Image,Modal,TouchableHighlight, Button } from 'react-native';
 
 
 
 
-function screen2({ navigation }) {
+function screen2({ route,navigation }) {
+  
+  const {result,state
+  }=route.params;
+  console.log(result);
+  
+  return(
+    <View>
     <TouchableHighlight 
     key={result.imdbID}
-     onPress={()=> Nextpage( navigation.getparam('result.imdbID'))}>
+     onPress={()=> Nextpage( (result.imdbID))}>
    <View style={styles.result} >
      
      <Text style={styles.heading}>{result.Title}</Text>
+     
    </View>
    </TouchableHighlight>
-      const Nextpage= id =>{
-        axios(apiurl + "&i=" + id).then(({data})=>{
-          let result=data;
-          
-          setState(prevState=>{
-            return{...prevState,selected:result}
-          });
-        });
-      }
+  
+     
       <Modal 
         
-        visible={(typeof state.selected.Title !="undefined")}>
+        visible={(typeof result.Title !="undefined")}>
           <View style={styles.page}>
-            <Text style={styles.pagetitle}>{state.selected.Title}</Text>
-            <Text style={{marginBottom:20}}>Rating:{state.selected.imdbRating}</Text>
-            <Text style={styles.plot}>{state.selected.Plot}</Text>
+            <Text style={styles.pagetitle}>{result.Title}</Text>
+            <Image
+            source={{ uri: result.Poster}}
+            style={{
+              width:200,
+              height:200,
+              marginBottom:20
+            }}/>
+            <Text style={styles.Type}>Year:{result.Year}</Text>
+            <Text style={styles.Type}>Seems Interesting! {result.Type} , you have to watch it</Text>
         
       </View>
       <TouchableHighlight 
-      onPress={()=>setState(prevState=>{ 
-        return{...prevState,selected:{}}
-      })}>
+      onPress={()=>navigation.navigate('screen1')}>
         <Text style={styles.BackBtn}>Back</Text>
   
       </TouchableHighlight>
       </Modal>
-    
+      </View>
+  )
   }
   
  
@@ -54,26 +57,7 @@ function screen2({ navigation }) {
   
   const styles = StyleSheet.create(
     {
-      container:{
-        flex:1,
-        backgroundColor: 'black',
-      },
-    title:{
-      color:'white',
-      fontSize:32,
-    },
-  searchbox:{
-    color:'black',
-    backgroundColor:'white',
-    fontSize:20,
-    fontWeight:'300',
-   padding:20,
-   width:'100%',
-   marginBottom:40
-  },
-  results:{
-    flex:1,
-  },
+     
   result:{
     flex:1,
     width:'100%',
@@ -92,9 +76,10 @@ function screen2({ navigation }) {
   pagetitle:{
     fontSize:24,
     fontWeight:'700',
-    marginBottom:5
+    marginBottom:20,
+    color:'black'
   },
-  plot:{
+  Type:{
     color:'black',
     fontSize:22,
     fontWeight:'800'

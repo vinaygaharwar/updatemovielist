@@ -16,13 +16,13 @@ const App = () => {
           name="screen1"
           component={screen1}
           options={{
-            title: 'screen1', //Set Header Title
+            title: 'screen1', 
             headerStyle: {
-              backgroundColor: '#f4511e', //Set Header color
+              backgroundColor: 'orange', 
             },
-            headerTintColor: '#fff', //Set Header text color
+            headerTintColor: 'black', 
             headerTitleStyle: {
-              fontWeight: 'bold', //Set Header text style
+              fontWeight: 'bold', 
             },
           }}
         />
